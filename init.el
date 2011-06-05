@@ -1,5 +1,6 @@
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(set-scroll-bar-mode 'right)
 
 (add-to-list 'load-path "~/elisp")
 (require 'package)
