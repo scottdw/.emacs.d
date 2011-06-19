@@ -23,8 +23,10 @@
 (setq whitespace-style '(trailing space-before-tab indentation space-after-tab))
 (setq-default indent-tabs-mode nil)
 
+(require 'auto-complete)
 (add-to-list 'ac-modes 'clojure-mode)
 (add-to-list 'ac-modes 'emacs-lisp-mode)
+
 (semantic-mode 1)
 
 (smex-initialize)
