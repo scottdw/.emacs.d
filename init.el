@@ -15,7 +15,7 @@
 (setq display-time-mode t)
 (setq european-calendar-style t)
 (setq inhibit-startup-message t)
-(setq make-backup-files nil) 
+(setq make-backup-files nil)
 (setq show-paren-mode t)
 (setq show-paren-style 'parenthesis)
 (setq tab-always-indent 'complete)
@@ -45,7 +45,6 @@
 (add-hook 'clojure-mode-hook (lambda () (whitespace-mode 1)))
 
 (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
-
 
 (global-set-key "\M-g" 'goto-line)
 
