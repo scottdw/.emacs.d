@@ -23,13 +23,17 @@
 (setq whitespace-style '(trailing space-before-tab indentation space-after-tab))
 (setq-default indent-tabs-mode nil)
 
+(semantic-mode 1)
+
 (require 'auto-complete)
 (add-to-list 'ac-modes 'clojure-mode)
 (add-to-list 'ac-modes 'emacs-lisp-mode)
 
-(semantic-mode 1)
-
 (smex-initialize)
+;; smex bindings
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;; iswitchb
 (iswitchb-mode t)
@@ -42,10 +46,6 @@
 
 (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
 
-;; smex bindings
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 (global-set-key "\M-g" 'goto-line)
 
