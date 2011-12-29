@@ -46,6 +46,7 @@
 
 (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
 
+(global-set-key (kbd "C-c C-f") 'find-file)
 (global-set-key "\M-g" 'goto-line)
 
 (load "cc-mode")
