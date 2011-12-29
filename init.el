@@ -54,8 +54,6 @@
 (global-set-key (kbd "C-<backspace>") 'c-hungry-delete-backwards)
 
 (display-time)
-(add-hook 'diary-hook 'appt-make-list)
-(diary 0)
 
 (put 'downcase-region 'disabled nil)
 
