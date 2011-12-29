@@ -2,6 +2,10 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (set-scroll-bar-mode 'right)
 
+(let ((font-string "DejaVu Sans Mono-10"))
+  (when (x-list-fonts font-string)
+    (set-face-attribute 'default nil :font font-string)))
+
 (add-to-list 'load-path "~/elisp")
 (require 'package)
 (add-to-list 'package-archives
