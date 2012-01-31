@@ -14,6 +14,7 @@
 
 (setq browse-url-browser-function 'browse-url-firefox)
 (setq column-number-mode 1)
+(setq confirm-kill-emacs 'yes-or-no-p)
 (setq default-truncate-lines 1)
 (setq display-time-24hr-format t)
 (setq display-time-mode t)
