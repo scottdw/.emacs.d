@@ -25,7 +25,6 @@
 (setq show-paren-style 'parenthesis)
 (setq tab-always-indent 'complete)
 (setq visible-bell t)
-(setq whitespace-style '(trailing space-before-tab indentation space-after-tab))
 (setq-default indent-tabs-mode nil)
 
 (semantic-mode 1)
@@ -33,6 +32,10 @@
 (require 'auto-complete)
 (add-to-list 'ac-modes 'clojure-mode)
 (add-to-list 'ac-modes 'emacs-lisp-mode)
+
+(require 'whitespace)
+(setq whitespace-style '(face tabs trailing space-before-tab empty space-after-tab))
+(global-whitespace-mode)
 
 (smex-initialize)
 ;; smex bindings
@@ -47,7 +50,6 @@
 (show-paren-mode 1)
 
 (add-hook 'clojure-mode-hook 'paredit-mode)
-(add-hook 'clojure-mode-hook (lambda () (whitespace-mode 1)))
 
 (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
 
