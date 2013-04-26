@@ -6,13 +6,23 @@
   (when (x-list-fonts font-string)
     (set-face-attribute 'default nil :font font-string)))
 
-(add-to-list 'load-path "~/elisp")
-(require 'package)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/") t)
-(package-initialize)
+(defface org-block-background
+  '((t (:background "#f3f3f3")))
+  "Face used for the source block background.")
 
-(setq browse-url-browser-function 'browse-url-firefox)
+(add-to-list 'load-path "~/elisp")
+
+(when (require 'package)
+  (add-to-list 'package-archives
+               '("marmalade" . "http://marmalade-repo.org/packages/") t)
+  (add-to-list 'package-archives
+               '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  (package-initialize))
+
+(when (require 'edit-server)
+  (edit-server-start)
+  (setq edit-server-new-frame nil))
+
 (setq column-number-mode 1)
 (setq confirm-kill-emacs 'yes-or-no-p)
 (setq default-truncate-lines 1)
@@ -26,6 +36,8 @@
 (setq tab-always-indent 'complete)
 (setq visible-bell t)
 (setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq initial-buffer-choice t)
 
 (semantic-mode 1)
 
@@ -62,8 +74,6 @@
 
 (display-time)
 
-(put 'downcase-region 'disabled nil)
-
 (setq initial-scratch-message
       (format ";; scratch buffer created %s\n;; happy hacking with GNU Emacs %s\n\n" (format-time-string "%Y-%m-%d at %T") emacs-version))
 
@@ -81,15 +91,25 @@
       `((".*" ,user-temporary-file-directory t)))
 
 (load-file "~/.emacs.d/local.el")
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(current-language-environment "UTF-8"))
+ '(current-language-environment "UTF-8")
+ '(custom-safe-themes (quote ("fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "be7eadb2971d1057396c20e2eebaa08ec4bfd1efe9382c12917c6fe24352b7c1" default))))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(put 'downcase-region 'disabled nil)
+(put 'ido-complete 'disabled nil)
+(put 'ido-exit-minibuffer 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
+(find-file "~/.emacs.d/init.el")
+(find-file "~/.emacs.d/local.el")
