@@ -13,18 +13,22 @@
 (require 'window-number)
 (window-number-meta-mode 1)
 
+(require 'smartparens-config)
+(smartparens-global-mode 1)
+
 (require 'ac-nrepl)
-(add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
+(add-hook 'nrepl-repl-mode-hook 'ac-nrepl-setup)
+(add-hook 'nrepl-repl-mode-hook 'subword-mode)
+(add-hook 'nrepl-repl-mode-hook 'smartparens-strict-mode)
 (add-hook 'clojure-nrepl-mode-hook 'ac-nrepl-setup)
+(add-hook 'clojure-mode-hook 'smartparens-strict-mode)
+(add-hook 'emacs-lisp-mode-hook 'smartparens-strict-mode)
 
 (add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
-(add-hook 'nrepl-mode-hook 'paredit-mode)
 (add-hook 'nrepl-mode-hook 'remove-dos-eol)
 
 (setq nrepl-popup-stacktraces nil)
 (setq nrepl-popup-stacktraces-in-repl t)
-
-(add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 
 (defun nlinum-on ()
   "Turn on `nlinum-mode in current buffer"
