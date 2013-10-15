@@ -53,9 +53,14 @@
 ;; Also highlight parens
 (show-paren-mode 1)
 
-(add-hook 'clojure-mode-hook 'paredit-mode)
-
 (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
+
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
+(eval-after-load "flycheck"
+  '(progn
+     (define-key flycheck-mode-map (kbd "C-c C-n") 'flycheck-next-error)
+     (define-key flycheck-mode-map (kbd "C-c C-p") 'flycheck-previous-error)))
 
 (global-set-key (kbd "C-c C-f") 'find-file)
 (global-set-key "\M-g" 'goto-line)

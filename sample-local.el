@@ -1,5 +1,6 @@
 (load "powershell-mode.el")
 (load "glsl-mode.el")
+
 (setq solarized-distinct-fringe-background t)
 (load-theme 'solarized-dark t)
 
@@ -86,7 +87,9 @@ the buffer."
   (interactive)
   (save-excursion
     (progn
-      (replace-regexp ">\\s-*<" ">\n<" nil (point-min) (point-max))
+      (goto-char (point-min))
+      (while (re-search-forward ">\\s-*<" nil t)
+        (replace-match ">\n<" nil nil))
       (indent-region (point-min) (point-max)))))
 
 (defun listify-lines (start end)
@@ -111,8 +114,8 @@ the buffer."
   "Removes characters before and including the quote at the start of a line and
   the quote and following characters at the end of the line."
   (interactive "*r")
-    (let ((end (copy-marker end)))
-      (replace-regexp ".*\"\\(.*\\)\".*" "\\1" nil start end)))
+  (let ((end (copy-marker end)))
+    (replace-regexp ".*\"\\(.*\\)\".*" "\\1" nil start end)))
 
 (defun maximize-frame ()
   "Maximizes the frame."
@@ -146,10 +149,10 @@ the buffer."
   (let ((b "QR-Encode"))
     (kill-buffer (get-buffer-create b))
     (call-process-region start end "java"
-                       nil b nil
-                       "-cp"
-                       "SET CLASSPATH"
-                       "InToQrPbm" "-i")
+                         nil b nil
+                         "-cp"
+                         "SET CLASSPATH"
+                         "InToQrPbm" "-i")
     (switch-to-buffer b)
     (image-mode)))
 
