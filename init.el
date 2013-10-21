@@ -10,6 +10,8 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (set-scroll-bar-mode nil)
 
+;; this property must be set before loading the theme.
+(setq solarized-distinct-fringe-background t)
 (load-theme 'solarized-dark t)
 
 (let ((font-string "DejaVu Sans Mono-10"))
@@ -142,7 +144,6 @@
  '(initial-buffer-choice t)
  '(make-backup-files nil)
  '(show-paren-mode t)
- '(solarized-distinct-fringe-background t)
  '(tab-always-indent (quote complete))
  '(truncate-lines t)
  '(visible-bell t)
