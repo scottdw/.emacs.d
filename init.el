@@ -1,3 +1,9 @@
+;;; init.el --- Personal GNU/Emacs initialisation file.
+;;; Commentary:
+;;; Initialisation file that should be shareable across installations,
+;;; ie. no machine specific settings.
+;;; Code:
+
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (set-scroll-bar-mode nil)
@@ -125,3 +131,5 @@
 
 (find-file "~/.emacs.d/init.el")
 (find-file "~/.emacs.d/local.el")
+
+;;; init.el ends here

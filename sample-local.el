@@ -1,5 +1,7 @@
-(setq solarized-distinct-fringe-background t)
-(load-theme 'solarized-dark t)
+;;; local.el --- Personal GNU/Emacs initialisation file.
+;;; Commentary:
+;;; Initialisation file with machine specific settings.
+;;; Code:
 
 (defun remove-dos-eol ()
   "Do not show ^M in files containing mixed UNIX and DOS line endings."
@@ -81,10 +83,10 @@
   (uniquify-all-lines-region (point-min) (point-max)))
 
 (defun format-xml ()
-  "Formats a buffer assuming that it contains xml.
-For the entire buffer it replaces all whitespace between close and open angle
-brackets with a single newline then runs the standard indent-region command on
-the buffer."
+  "Formats a buffer containing xml.
+For the entire buffer it replaces all whitespace between close
+and open angle brackets with a single newline then runs the
+standard `indent-region' command on the buffer."
   (interactive)
   (save-excursion
     (progn
@@ -94,7 +96,9 @@ the buffer."
       (indent-region (point-min) (point-max)))))
 
 (defun listify-lines (start end)
-  "Replaces a region of lines with the contents of each line separated by a comma and placed within parentheses."
+  "Replace a region of lines with a list in parentheses.
+Starting at START and ending at END with the contents of each
+line separated by a comma and placed within parentheses."
   (interactive "*r")
   (save-excursion
     (let ((end (copy-marker end)))
@@ -105,18 +109,19 @@ the buffer."
       (replace-regexp "\n" ", " nil start end))))
 
 (defun stringify-lines (start end)
-  "Wraps each line of the region in apostrophes."
+  "Wrap each line of the region (from START to END) in apostrophes."
   (interactive "*r")
   (save-excursion
     (let ((end (copy-marker end)))
       (replace-regexp "\\s-*\\(.*\\)\\s-*" "'\\1'" nil start end))))
 
 (defun destringify-lines (start end)
-  "Removes characters before and including the quote at the start of a line and
-  the quote and following characters at the end of the line."
+  "Remove characters before and including the quote at the start
+  of a line and the quote and following characters at the end of
+  the line."
   (interactive "*r")
-  (let ((end (copy-marker end)))
-    (replace-regexp ".*\"\\(.*\\)\".*" "\\1" nil start end)))
+    (let ((end (copy-marker end)))
+      (replace-regexp ".*\"\\(.*\\)\".*" "\\1" nil start end)))
 
 (defun maximize-frame ()
   "Maximizes the frame."
@@ -124,13 +129,14 @@ the buffer."
   (w32-send-sys-command 61488))
 
 (defun squash-space (start end)
-  "Replaces repeated whitespace with a single space character"
+  "Replace repeated whitespace with a single space character.
+Starting at START and ending at END."
   (interactive "*r")
   (save-excursion)
   (replace-regexp "\\s-+" " " nil start end))
 
 (defun increment-number-at-point (&optional arg)
-  "Increment the number forward from point by 'arg'."
+  "Increment the number forward from point by ARG."
   (interactive "p*")
   (save-excursion
     (save-match-data
@@ -146,6 +152,7 @@ the buffer."
                                  answer)))))))
 
 (defun qr-encode-region (start end)
+  "Generate a QR code for the region between START and END."
   (interactive "r")
   (let ((b "QR-Encode"))
     (kill-buffer (get-buffer-create b))
@@ -188,11 +195,11 @@ point reaches the beginning or end of the buffer, stop there."
 
 ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
 (defun unfill-paragraph ()
-  "Takes a multi-line paragraph and makes it into a single line of text."
+  "Take a multi-line paragraph and make it into a single line of text."
   (interactive)
   (let ((fill-column (point-max)))
     (fill-paragraph nil)))
 
 (define-key global-map "\M-Q" 'unfill-paragraph)
 
-(server-start)
+;;; local.el ends here
