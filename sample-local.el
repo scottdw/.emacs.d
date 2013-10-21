@@ -1,6 +1,3 @@
-(load "powershell-mode.el")
-(load "glsl-mode.el")
-
 (setq solarized-distinct-fringe-background t)
 (load-theme 'solarized-dark t)
 
