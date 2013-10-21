@@ -6,6 +6,17 @@
 
 (package-initialize)
 
+(mapc
+ (lambda (package)
+   (or (package-installed-p package)
+       (if (y-or-n-p (format "Package %s is missing.  Install it? " package))
+           (package-install package))))
+ '(ac-nrepl auto-complete auto-complete-nxml cider clojure-mode
+   edit-server ess feature-mode flycheck glsl-mode graphviz-dot-mode
+   haskell-mode hungry-delete magit markdown-mode nlinum popup
+   powershell-mode rainbow-mode smartparens smex solarized-theme
+   undo-tree window-number))
+
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (set-scroll-bar-mode nil)
