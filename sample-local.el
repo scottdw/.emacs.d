@@ -11,9 +11,6 @@
 
 (add-hook 'cider-repl-mode-hook 'remove-dos-eol)
 
-(eval-after-load "auto-complete"
-  '(add-to-list 'ac-modes 'nrepl-mode))
-
 (setq auto-mode-alist
       (append
        '(
