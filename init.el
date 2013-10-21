@@ -4,13 +4,20 @@
 ;;; ie. no machine specific settings.
 ;;; Code:
 
+(package-initialize)
+
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (set-scroll-bar-mode nil)
 
+(load-theme 'solarized-dark t)
+
 (let ((font-string "DejaVu Sans Mono-10"))
   (when (x-list-fonts font-string)
     (set-face-attribute 'default nil :font font-string)))
+
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
 
 (defface org-block-background
   '((t (:background "#f3f3f3")))
@@ -18,33 +25,29 @@
 
 (add-to-list 'load-path "~/elisp")
 
-(when (require 'package)
-  (add-to-list 'package-archives
-               '("marmalade" . "http://marmalade-repo.org/packages/") t)
-  (add-to-list 'package-archives
-               '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  (package-initialize))
+(eval-after-load "package"
+  '(progn
+     (add-to-list 'package-archives
+                  '("marmalade" . "http://marmalade-repo.org/packages/") t)
+     (add-to-list 'package-archives
+                  '("melpa" . "http://melpa.milkbox.net/packages/") t)))
 
+(server-start)
 (when (require 'edit-server)
-  (edit-server-start)
-  (setq edit-server-new-frame nil))
+  (edit-server-start))
 
 (add-hook 'calendar-load-hook
           (lambda ()
             (calendar-set-date-style 'european)))
 
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
-(setq initial-buffer-choice t)
-
 (semantic-mode 1)
 
-(require 'auto-complete)
-(add-to-list 'ac-modes 'clojure-mode)
-(add-to-list 'ac-modes 'emacs-lisp-mode)
+(eval-after-load "auto-complete"
+  '(progn
+     (add-to-list 'ac-modes 'clojure-mode)
+     (add-to-list 'ac-modes 'emacs-lisp-mode)
+     (add-to-list 'ac-modes 'cider-repl-mode)))
 
-(require 'whitespace)
-(setq whitespace-style '(face tabs trailing space-before-tab empty space-after-tab))
 (global-whitespace-mode)
 
 (smex-initialize)
@@ -62,6 +65,27 @@
 (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
+
+(when (require 'window-number)
+  (window-number-meta-mode 1))
+
+(when (require 'smartparens-config)
+  (smartparens-global-mode 1))
+
+(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+(add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
+(add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
+(add-hook 'cider-repl-mode-hook 'subword-mode)
+(add-hook 'clojure-mode-hook 'smartparens-strict-mode)
+(add-hook 'emacs-lisp-mode-hook 'smartparens-strict-mode)
+
+(defun nlinum-on ()
+  "Turn on `nlinum-mode in current buffer."
+  (unless (minibufferp)
+    (nlinum-mode 1)))
+
+(define-globalized-minor-mode global-nlinum-mode nlinum-mode nlinum-on)
+(global-nlinum-mode)
 
 (eval-after-load "flycheck"
   '(progn
@@ -102,6 +126,9 @@
  ;; If there is more than one, they won't work right.
  '(background-color "#002b36")
  '(background-mode dark)
+ '(cider-auto-select-error-buffer t)
+ '(cider-popup-stacktraces nil)
+ '(cider-repl-popup-stacktraces t)
  '(column-number-mode t)
  '(confirm-kill-emacs (quote yes-or-no-p))
  '(current-language-environment "UTF-8")
@@ -109,20 +136,24 @@
  '(custom-safe-themes (quote ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "be7eadb2971d1057396c20e2eebaa08ec4bfd1efe9382c12917c6fe24352b7c1" default)))
  '(display-time-24hr-format t)
  '(display-time-mode t)
+ '(edit-server-new-frame nil)
  '(foreground-color "#839496")
  '(inhibit-startup-screen t)
+ '(initial-buffer-choice t)
  '(make-backup-files nil)
  '(show-paren-mode t)
+ '(solarized-distinct-fringe-background t)
  '(tab-always-indent (quote complete))
  '(truncate-lines t)
- '(visible-bell t))
+ '(visible-bell t)
+ '(whitespace-style (quote (face tabs trailing space-before-tab empty space-after-tab))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-level-1 ((t (:inherit variable-pitch :foreground "#cb4b16" :height 1.3 :family "DejaVu"))))
+ '(org-level-1 ((t (:inherit variable-pitch :foreground "#cb4b16" :height 1.3 :family "DejaVu"))) t)
  '(variable-pitch ((t (:family "DejaVu")))))
 (put 'downcase-region 'disabled nil)
 (put 'ido-complete 'disabled nil)
