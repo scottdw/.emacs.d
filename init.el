@@ -97,9 +97,8 @@
 (global-set-key (kbd "C-c C-f") 'find-file)
 (global-set-key "\M-g" 'goto-line)
 
-(load "cc-mode")
-(global-set-key (kbd "C-<delete>") 'c-hungry-delete-forward)
-(global-set-key (kbd "C-<backspace>") 'c-hungry-delete-backwards)
+(global-set-key (kbd "C-<delete>") 'hungry-delete-forward)
+(global-set-key (kbd "C-<backspace>") 'hungry-delete-backward)
 
 (display-time)
 
