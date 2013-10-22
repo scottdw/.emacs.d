@@ -58,9 +58,18 @@
      (add-to-list 'ac-modes 'cider-repl-mode)))
 
 (global-whitespace-mode)
+;; Keybindings
+(global-set-key "\M-g" 'goto-line)
+
+;; hungry-delete
+(global-set-key (kbd "C-<delete>") 'hungry-delete-forward)
+(global-set-key (kbd "C-<backspace>") 'hungry-delete-backward)
+
+;; projectile
+(global-set-key (kbd "C-c C-f") 'projectile-find-file)
 
 (smex-initialize)
-;; smex bindings
+;; smex
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
@@ -100,12 +109,6 @@
   '(progn
      (define-key flycheck-mode-map (kbd "C-c C-n") 'flycheck-next-error)
      (define-key flycheck-mode-map (kbd "C-c C-p") 'flycheck-previous-error)))
-
-(global-set-key (kbd "C-c C-f") 'find-file)
-(global-set-key "\M-g" 'goto-line)
-
-(global-set-key (kbd "C-<delete>") 'hungry-delete-forward)
-(global-set-key (kbd "C-<backspace>") 'hungry-delete-backward)
 
 (display-time)
 
