@@ -45,19 +45,12 @@
      (add-to-list 'package-archives
                   '("melpa" . "http://melpa.milkbox.net/packages/") t)))
 
-(server-start)
-(when (require 'edit-server)
-  (edit-server-start))
-
-(semantic-mode 1)
-
 (eval-after-load "auto-complete"
   '(progn
      (add-to-list 'ac-modes 'clojure-mode)
      (add-to-list 'ac-modes 'emacs-lisp-mode)
      (add-to-list 'ac-modes 'cider-repl-mode)))
 
-(global-whitespace-mode)
 ;; Keybindings
 (global-set-key "\M-g" 'goto-line)
 
@@ -68,42 +61,47 @@
 ;; projectile
 (global-set-key (kbd "C-c C-f") 'projectile-find-file)
 
-(smex-initialize)
 ;; smex
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
-;; iswitchb
-(iswitchb-mode t)
-
-;; Also highlight parens
-(show-paren-mode 1)
+(autoload 'window-number-meta-mode "window-number"
+  "A global minor mode that enables use of the M- prefix to select
+windows, use `window-number-mode' to display the window numbers in
+the mode-line."
+  t)
 
 (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
-
-(add-hook 'after-init-hook #'global-flycheck-mode)
-
-(when (require 'window-number)
-  (window-number-meta-mode 1))
-
-(when (require 'smartparens-config)
-  (smartparens-global-mode 1))
-
-(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
-(add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
-(add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
-(add-hook 'cider-repl-mode-hook 'subword-mode)
-(add-hook 'clojure-mode-hook 'smartparens-strict-mode)
-(add-hook 'emacs-lisp-mode-hook 'smartparens-strict-mode)
-
+(require 'nlinum)
 (defun nlinum-on ()
   "Turn on `nlinum-mode in current buffer."
   (unless (minibufferp)
     (nlinum-mode 1)))
 
 (define-globalized-minor-mode global-nlinum-mode nlinum-mode nlinum-on)
-(global-nlinum-mode)
+
+(defun initialise-global-modes ()
+  "Turn on global modes."
+  (global-flycheck-mode 1)
+  (global-nlinum-mode 1)
+  (global-whitespace-mode 1)
+  (iswitchb-mode 1)
+  (projectile-global-mode 1)
+  (semantic-mode 1)
+  (show-paren-mode 1)
+  (smartparens-global-mode 1)
+  (smex-initialize)
+  (server-start)
+  (edit-server-start))
+
+(add-hook 'after-init-hook 'initialise-global-modes)
+(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+(add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
+(add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
+(add-hook 'cider-repl-mode-hook 'subword-mode)
+(add-hook 'clojure-mode-hook 'smartparens-strict-mode)
+(add-hook 'emacs-lisp-mode-hook 'smartparens-strict-mode)
 
 (eval-after-load "flycheck"
   '(progn
