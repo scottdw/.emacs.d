@@ -13,7 +13,7 @@
            (package-install package))))
  '(ac-nrepl auto-complete auto-complete-nxml cider clojure-mode
    edit-server ess feature-mode flycheck glsl-mode graphviz-dot-mode
-   haskell-mode hungry-delete magit markdown-mode nlinum popup
+   haskell-mode hungry-delete magit markdown-mode nlinum popup projectile
    powershell-mode rainbow-mode smartparens smex solarized-theme
    undo-tree window-number))
 
