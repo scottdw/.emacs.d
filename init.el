@@ -21,6 +21,7 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 
 ;; this property must be set before loading the theme.
+(require 'solarized)
 (setq solarized-distinct-fringe-background t)
 (load-theme 'solarized-dark t)
 
