@@ -34,8 +34,8 @@
 
 (setq org-src-fontify-natively t)
 
-(setenv "JAVA_HOME" "C:\\Program Files\\Java\\jdk1.7.0_21")
-(setenv "JAVA_CMD" "C:\\Program Files\\Java\\jdk1.7.0_21\\bin\\java")
+(setenv "JAVA_HOME" "C:\\Program Files\\Java\\jdk1.7.0_45")
+(setenv "JAVA_CMD" "C:\\Program Files\\Java\\jdk1.7.0_45\\bin\\java")
 
 (defun uniquify-all-lines-region (start end)
   "Find duplicate lines in region START to END keeping first occurrence."
