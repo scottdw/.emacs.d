@@ -168,7 +168,7 @@
 (put 'ido-exit-minibuffer 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
-(find-file "~/.emacs.d/init.el")
 (find-file "~/.emacs.d/local.el")
+(find-file "~/.emacs.d/init.el")
 
 ;;; init.el ends here
