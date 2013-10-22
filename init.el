@@ -19,7 +19,6 @@
 
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(set-scroll-bar-mode nil)
 
 ;; this property must be set before loading the theme.
 (setq solarized-distinct-fringe-background t)
@@ -152,6 +151,7 @@ the mode-line."
  '(inhibit-startup-screen t)
  '(initial-buffer-choice t)
  '(make-backup-files nil)
+ '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(tab-always-indent (quote complete))
  '(truncate-lines t)
