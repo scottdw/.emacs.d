@@ -4,6 +4,13 @@
 ;;; ie. no machine specific settings.
 ;;; Code:
 
+(eval-after-load "package"
+  '(progn
+     (add-to-list 'package-archives
+                  '("marmalade" . "http://marmalade-repo.org/packages/") t)
+     (add-to-list 'package-archives
+                  '("melpa" . "http://melpa.milkbox.net/packages/") t)))
+
 (package-initialize)
 
 (mapc
@@ -37,13 +44,6 @@
   "Face used for the source block background.")
 
 (add-to-list 'load-path "~/elisp")
-
-(eval-after-load "package"
-  '(progn
-     (add-to-list 'package-archives
-                  '("marmalade" . "http://marmalade-repo.org/packages/") t)
-     (add-to-list 'package-archives
-                  '("melpa" . "http://melpa.milkbox.net/packages/") t)))
 
 (eval-after-load "auto-complete"
   '(progn
