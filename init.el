@@ -72,7 +72,6 @@ windows, use `window-number-mode' to display the window numbers in
 the mode-line."
   t)
 
-(add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
 (require 'nlinum)
 (defun nlinum-on ()
   "Turn on `nlinum-mode in current buffer."
@@ -96,11 +95,13 @@ the mode-line."
   (edit-server-start))
 
 (add-hook 'after-init-hook 'initialise-global-modes)
+(add-hook 'cider-mode-hook 'ac-nrepl-setup)
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 (add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
 (add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
 (add-hook 'cider-repl-mode-hook 'subword-mode)
 (add-hook 'clojure-mode-hook 'smartparens-strict-mode)
+(add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
 (add-hook 'emacs-lisp-mode-hook 'smartparens-strict-mode)
 
 (eval-after-load "flycheck"
