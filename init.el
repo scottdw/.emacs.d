@@ -49,10 +49,6 @@
 (when (require 'edit-server)
   (edit-server-start))
 
-(add-hook 'calendar-load-hook
-          (lambda ()
-            (calendar-set-date-style 'european)))
-
 (semantic-mode 1)
 
 (eval-after-load "auto-complete"
@@ -138,6 +134,7 @@
  ;; If there is more than one, they won't work right.
  '(background-color "#002b36")
  '(background-mode dark)
+ '(calendar-date-style (quote iso))
  '(cider-auto-select-error-buffer t)
  '(cider-popup-stacktraces nil)
  '(cider-repl-popup-stacktraces t)
