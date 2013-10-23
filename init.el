@@ -43,6 +43,9 @@
   '((t (:background "#f3f3f3")))
   "Face used for the source block background.")
 
+;; Configure smartparens
+(require 'smartparens-config)
+
 (add-to-list 'load-path "~/elisp")
 
 (eval-after-load "auto-complete"
