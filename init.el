@@ -18,7 +18,7 @@
    (or (package-installed-p package)
        (if (y-or-n-p (format "Package %s is missing.  Install it? " package))
            (package-install package))))
- '(ac-nrepl ace-jump auto-complete auto-complete-nxml cider
+ '(ac-nrepl ace-jump-mode auto-complete auto-complete-nxml cider
  clojure-mode edit-server ess feature-mode flycheck glsl-mode
  graphviz-dot-mode haskell-mode hungry-delete magit markdown-mode
  nlinum popup projectile powershell-mode rainbow-mode smartparens
