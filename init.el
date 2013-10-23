@@ -96,6 +96,8 @@ the mode-line."
   (semantic-mode 1)
   (smartparens-global-mode 1)
   (smex-initialize)
+  (window-number-meta-mode)
+  (window-number-mode)
   (server-start)
   (edit-server-start))
 
