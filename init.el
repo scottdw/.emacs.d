@@ -88,7 +88,6 @@ the mode-line."
   (iswitchb-mode 1)
   (projectile-global-mode 1)
   (semantic-mode 1)
-  (show-paren-mode 1)
   (smartparens-global-mode 1)
   (smex-initialize)
   (server-start)
