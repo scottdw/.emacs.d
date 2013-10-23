@@ -18,11 +18,11 @@
    (or (package-installed-p package)
        (if (y-or-n-p (format "Package %s is missing.  Install it? " package))
            (package-install package))))
- '(ac-nrepl auto-complete auto-complete-nxml cider clojure-mode
-   edit-server ess feature-mode flycheck glsl-mode graphviz-dot-mode
-   haskell-mode hungry-delete magit markdown-mode nlinum popup projectile
-   powershell-mode rainbow-mode smartparens smex solarized-theme
-   undo-tree window-number))
+ '(ac-nrepl ace-jump auto-complete auto-complete-nxml cider
+ clojure-mode edit-server ess feature-mode flycheck glsl-mode
+ graphviz-dot-mode haskell-mode hungry-delete magit markdown-mode
+ nlinum popup projectile powershell-mode rainbow-mode smartparens
+ smex solarized-theme undo-tree window-number))
 
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
@@ -56,6 +56,9 @@
 
 ;; Keybindings
 (global-set-key "\M-g" 'goto-line)
+
+;; ace-jump
+(global-set-key (kbd "C-c SPC") 'ace-jump-mode)
 
 ;; hungry-delete
 (global-set-key (kbd "C-<delete>") 'hungry-delete-forward)
