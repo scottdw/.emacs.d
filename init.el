@@ -54,6 +54,10 @@
      (add-to-list 'ac-modes 'emacs-lisp-mode)
      (add-to-list 'ac-modes 'cider-repl-mode)))
 
+(require 'auto-complete-config)
+(require 'ac-nrepl)
+(ac-config-default)
+
 ;; Keybindings
 (global-set-key "\M-g" 'goto-line)
 
