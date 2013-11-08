@@ -167,6 +167,7 @@ the mode-line."
  '(make-backup-files nil)
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
+ '(sp-hybrid-kill-entire-symbol nil)
  '(tab-always-indent (quote complete))
  '(truncate-lines t)
  '(visible-bell t)
