@@ -17,9 +17,9 @@
  (lambda (package)
    (or (package-installed-p package)
        (if (y-or-n-p (format "Package %s is missing.  Install it? " package))
-           (package-install package))))
- '(ac-nrepl ace-jump-mode auto-complete auto-complete-nxml cider
- clojure-mode edit-server ess feature-mode flycheck glsl-mode
+           (package-install package)))) '(ac-nrepl ace-jump-mode
+ auto-complete auto-complete-nxml cider clojure-mode diff-hl
+ edit-server ess feature-mode flycheck glsl-mode
  graphviz-dot-mode haskell-mode hungry-delete magit markdown-mode
  nlinum popup projectile powershell-mode rainbow-mode smartparens
  smex solarized-theme undo-tree window-number))
@@ -95,6 +95,7 @@ the mode-line."
   (global-flycheck-mode 1)
   (global-nlinum-mode 1)
   (global-whitespace-mode 1)
+  (global-diff-hl-mode 1)
   (iswitchb-mode 1)
   (projectile-global-mode 1)
   (semantic-mode 1)
