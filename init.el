@@ -13,16 +13,7 @@
 
 (package-initialize)
 
-(mapc
- (lambda (package)
-   (or (package-installed-p package)
-       (if (y-or-n-p (format "Package %s is missing.  Install it? " package))
-           (package-install package)))) '(ac-nrepl ace-jump-mode
- auto-complete auto-complete-nxml cider clojure-mode diff-hl
- edit-server ess feature-mode flycheck glsl-mode
- graphviz-dot-mode haskell-mode hungry-delete magit markdown-mode
- nlinum popup projectile powershell-mode rainbow-mode smartparens
- smex solarized-theme undo-tree window-number))
+;; useful packages (ac-nrepl ace-jump-mode auto-complete auto-complete-nxml cider clojure-mode diff-hl edit-server ess feature-mode flycheck glsl-mode  graphviz-dot-mode haskell-mode hungry-delete magit markdown-mode nlinum popup projectile powershell-mode rainbow-mode smartparens smex solarized-theme undo-tree window-number)
 
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
@@ -82,21 +73,12 @@ windows, use `window-number-mode' to display the window numbers in
 the mode-line."
   t)
 
-(require 'nlinum)
-(defun nlinum-on ()
-  "Turn on `nlinum-mode in current buffer."
-  (unless (minibufferp)
-    (nlinum-mode 1)))
-
-(define-globalized-minor-mode global-nlinum-mode nlinum-mode nlinum-on)
-
 (defun initialise-global-modes ()
   "Turn on global modes."
   (global-flycheck-mode 1)
-  (global-nlinum-mode 1)
   (global-whitespace-mode 1)
   (global-diff-hl-mode 1)
-  (iswitchb-mode 1)
+  (icomplete-mode 1)
   (projectile-global-mode 1)
   (semantic-mode 1)
   (smartparens-global-mode 1)
@@ -116,6 +98,8 @@ the mode-line."
 (add-hook 'clojure-mode-hook 'smartparens-strict-mode)
 (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
 (add-hook 'emacs-lisp-mode-hook 'smartparens-strict-mode)
+(add-hook 'nrepl-popup-buffer-mode-hook 'remove-dos-eol)
+(add-hook 'cider-popup-buffer-mode-hook 'remove-dos-eol)
 
 (eval-after-load "flycheck"
   '(progn
@@ -126,6 +110,8 @@ the mode-line."
 
 (setq initial-scratch-message
       (format ";; scratch buffer created %s\n;; happy hacking with GNU Emacs %s\n\n" (format-time-string "%Y-%m-%d at %T") emacs-version))
+
+(setq org-startup-folded "showall")
 
 (defvar user-temporary-file-directory
   (concat temporary-file-directory user-login-name "/"))
