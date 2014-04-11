@@ -37,16 +37,6 @@
 
 (add-to-list 'load-path "~/elisp")
 
-(eval-after-load "auto-complete"
-  '(progn
-     (add-to-list 'ac-modes 'clojure-mode)
-     (add-to-list 'ac-modes 'emacs-lisp-mode)
-     (add-to-list 'ac-modes 'cider-repl-mode)))
-
-(require 'auto-complete-config)
-(require 'ac-nrepl)
-(ac-config-default)
-
 ;; Keybindings
 (global-set-key "\M-g" 'goto-line)
 
@@ -73,6 +63,7 @@ the mode-line."
 
 (defun initialise-global-modes ()
   "Turn on global modes."
+  (global-company-mode 1)
   (global-flycheck-mode 1)
   (global-whitespace-mode 1)
   (global-diff-hl-mode 1)
@@ -87,9 +78,6 @@ the mode-line."
   (edit-server-start))
 
 (add-hook 'after-init-hook 'initialise-global-modes)
-(add-hook 'cider-mode-hook 'ac-nrepl-setup)
-(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
-(add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
 (add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
 (add-hook 'cider-repl-mode-hook 'subword-mode)
 (add-hook 'clojure-mode-hook 'flycheck-mode)
@@ -103,6 +91,11 @@ the mode-line."
   '(progn
      (define-key flycheck-mode-map (kbd "C-c C-n") 'flycheck-next-error)
      (define-key flycheck-mode-map (kbd "C-c C-p") 'flycheck-previous-error)))
+
+(eval-after-load 'company
+  '(progn
+     (add-to-list 'company-backends 'company-capf)
+     (add-to-list 'company-backends 'company-cider)))
 
 (display-time)
 
