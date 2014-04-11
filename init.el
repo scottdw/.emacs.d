@@ -81,8 +81,6 @@ the mode-line."
 (add-hook 'clojure-mode-hook 'smartparens-strict-mode)
 (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
 (add-hook 'emacs-lisp-mode-hook 'smartparens-strict-mode)
-(add-hook 'nrepl-popup-buffer-mode-hook 'remove-dos-eol)
-(add-hook 'cider-popup-buffer-mode-hook 'remove-dos-eol)
 
 (eval-after-load "flycheck"
   '(progn

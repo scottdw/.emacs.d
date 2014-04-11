@@ -9,8 +9,6 @@
   (setq buffer-display-table (make-display-table))
   (aset buffer-display-table ?\^M []))
 
-(add-hook 'cider-repl-mode-hook 'remove-dos-eol)
-
 (setq auto-mode-alist
       (append
        '(
