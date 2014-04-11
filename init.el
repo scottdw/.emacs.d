@@ -47,9 +47,6 @@
 (global-set-key (kbd "C-<delete>") 'hungry-delete-forward)
 (global-set-key (kbd "C-<backspace>") 'hungry-delete-backward)
 
-;; projectile
-(global-set-key (kbd "C-c C-f") 'projectile-find-file)
-
 ;; smex
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
