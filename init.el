@@ -89,8 +89,7 @@ the mode-line."
 
 (eval-after-load 'company
   '(progn
-     (add-to-list 'company-backends 'company-capf)
-     (add-to-list 'company-backends 'company-cider)))
+     (add-to-list 'company-backends 'company-capf)))
 
 (display-time)
 
