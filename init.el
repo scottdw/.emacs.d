@@ -7,8 +7,6 @@
 (eval-after-load "package"
   '(progn
      (add-to-list 'package-archives
-                  '("marmalade" . "http://marmalade-repo.org/packages/") t)
-     (add-to-list 'package-archives
                   '("melpa" . "http://melpa.milkbox.net/packages/") t)))
 
 (package-initialize)
@@ -19,6 +17,11 @@
 ;; this property must be set before loading the theme.
 (require 'solarized)
 (setq solarized-distinct-fringe-background t)
+(setq solarized-height-minus-1 1.0)
+(setq solarized-height-plus-1 1.0)
+(setq solarized-height-plus-2 1.0)
+(setq solarized-height-plus-3 1.0)
+(setq solarized-height-plus-4 1.0)
 (load-theme 'solarized-dark t)
 
 (let ((font-string "DejaVu Sans Mono-10"))
@@ -27,10 +30,6 @@
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
-
-(defface org-block-background
-  '((t (:background "#f3f3f3")))
-  "Face used for the source block background.")
 
 ;; Configure smartparens
 (require 'smartparens-config)
