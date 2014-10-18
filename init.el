@@ -79,10 +79,14 @@ the mode-line."
 (add-hook 'after-init-hook 'initialise-global-modes)
 (add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
 (add-hook 'cider-repl-mode-hook 'subword-mode)
+(add-hook 'cider-repl-mode-hook 'remove-dos-eol)
 (add-hook 'clojure-mode-hook 'flycheck-mode)
 (add-hook 'clojure-mode-hook 'smartparens-strict-mode)
+(add-hook 'clojure-mode-hook #'aggressive-indent-mode)
 (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
 (add-hook 'emacs-lisp-mode-hook 'smartparens-strict-mode)
+(add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+(add-hook 'smartparens-mode 'sp-use-smartparens-bindings)
 
 (eval-after-load "flycheck"
   '(progn
@@ -124,8 +128,7 @@ the mode-line."
  '(background-mode dark)
  '(calendar-date-style (quote iso))
  '(cider-auto-select-error-buffer t)
- '(cider-popup-stacktraces nil)
- '(cider-repl-popup-stacktraces t)
+ '(cider-show-error-buffer t)
  '(column-number-mode t)
  '(confirm-kill-emacs (quote yes-or-no-p))
  '(current-language-environment "UTF-8")
