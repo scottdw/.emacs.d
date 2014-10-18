@@ -12,6 +12,7 @@
 (setq auto-mode-alist
       (append
        '(
+         ("\\.m$" . octave-mode)
          ("\\.config\\'" . nxml-mode)
          ("\\.targets\\'" . nxml-mode)
          ("\\.ps1\\'" . powershell-mode)
@@ -20,6 +21,9 @@
 
 (setq diff-command
       "C:/MinGW/msys/1.0/bin/diff")
+
+(setq inferior-octave-program "c:\\Software\\Octave-3.6.4\\bin\\octave.exe")
+(setq inferior-octave-prompt ">> ")
 
 (setq magit-git-executable
       "C:/Program Files (x86)/Git/bin/git")

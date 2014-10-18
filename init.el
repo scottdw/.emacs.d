@@ -57,9 +57,6 @@ windows, use `window-number-mode' to display the window numbers in
 the mode-line."
   t)
 
-(setq auto-mode-alist
-      (cons '("\\.m$" . octave-mode) auto-mode-alist))
-
 (defun initialise-global-modes ()
   "Turn on global modes."
   (global-company-mode 1)
