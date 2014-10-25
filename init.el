@@ -63,6 +63,7 @@ the mode-line."
   (global-flycheck-mode 1)
   (global-whitespace-mode 1)
   (global-diff-hl-mode 1)
+  (global-prettify-symbols-mode 1)
   (icomplete-mode 1)
   (projectile-global-mode 1)
   (semantic-mode 1)
