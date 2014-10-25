@@ -73,13 +73,21 @@ the mode-line."
   (server-start)
   (edit-server-start))
 
+(defun initialise-clj-refactor ()
+  "Enables `clj-refactor-mode' and its keybindings."
+  (clj-refactor-mode 1)
+  (yas/minor-mode 1)
+  (cljr-add-keybindings-with-prefix "C-c r"))
+
 (add-hook 'after-init-hook 'initialise-global-modes)
 (add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
 (add-hook 'cider-repl-mode-hook 'subword-mode)
 (add-hook 'cider-repl-mode-hook 'remove-dos-eol)
+(add-hook 'cider-repl-mode-hook 'initialise-clj-refactor)
 (add-hook 'clojure-mode-hook 'flycheck-mode)
 (add-hook 'clojure-mode-hook 'smartparens-strict-mode)
 (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
+(add-hook 'clojure-mode-hook 'initialise-clj-refactor)
 (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
 (add-hook 'emacs-lisp-mode-hook 'smartparens-strict-mode)
 (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
