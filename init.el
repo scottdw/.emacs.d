@@ -145,6 +145,7 @@ the mode-line."
  '(display-time-24hr-format t)
  '(display-time-mode t)
  '(edit-server-new-frame nil)
+ '(flycheck-display-errors-function #'flycheck-pos-tip-error-messages)
  '(foreground-color "#839496")
  '(inhibit-startup-screen t)
  '(initial-buffer-choice t)
