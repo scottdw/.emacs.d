@@ -39,19 +39,19 @@
 (add-to-list 'load-path "~/elisp")
 
 ;; Keybindings
-(global-set-key "\M-g" 'goto-line)
+(global-set-key "\M-g" #'goto-line)
 
 ;; ace-jump
-(global-set-key (kbd "C-c SPC") 'ace-jump-mode)
+(global-set-key (kbd "C-c SPC") #'ace-jump-mode)
 
 ;; hungry-delete
-(global-set-key (kbd "C-<delete>") 'hungry-delete-forward)
-(global-set-key (kbd "C-<backspace>") 'hungry-delete-backward)
+(global-set-key (kbd "C-<delete>") #'hungry-delete-forward)
+(global-set-key (kbd "C-<backspace>") #'hungry-delete-backward)
 
 ;; smex
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+(global-set-key (kbd "M-x") #'smex)
+(global-set-key (kbd "M-X") #'smex-major-mode-commands)
+(global-set-key (kbd "C-c C-c M-x") #'execute-extended-command)
 
 (autoload 'window-number-meta-mode "window-number"
   "A global minor mode that enables use of the M- prefix to select
@@ -82,24 +82,24 @@ the mode-line."
   (yas/minor-mode 1)
   (cljr-add-keybindings-with-prefix "C-c r"))
 
-(add-hook 'after-init-hook 'initialise-global-modes)
-(add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
-(add-hook 'cider-repl-mode-hook 'subword-mode)
-(add-hook 'cider-repl-mode-hook 'remove-dos-eol)
-(add-hook 'cider-repl-mode-hook 'initialise-clj-refactor)
-(add-hook 'clojure-mode-hook 'flycheck-mode)
-(add-hook 'clojure-mode-hook 'smartparens-strict-mode)
+(add-hook 'after-init-hook #'initialise-global-modes)
+(add-hook 'cider-repl-mode-hook #'smartparens-strict-mode)
+(add-hook 'cider-repl-mode-hook #'subword-mode)
+(add-hook 'cider-repl-mode-hook #'remove-dos-eol)
+(add-hook 'cider-repl-mode-hook #'initialise-clj-refactor)
+(add-hook 'clojure-mode-hook #'flycheck-mode)
+(add-hook 'clojure-mode-hook #'smartparens-strict-mode)
 (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
-(add-hook 'clojure-mode-hook 'initialise-clj-refactor)
-(add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt)
-(add-hook 'emacs-lisp-mode-hook 'smartparens-strict-mode)
+(add-hook 'clojure-mode-hook #'initialise-clj-refactor)
+(add-hook 'comint-output-filter-functions #'comint-watch-for-password-prompt)
+(add-hook 'emacs-lisp-mode-hook #'smartparens-strict-mode)
 (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
-(add-hook 'smartparens-mode 'sp-use-smartparens-bindings)
+(add-hook 'smartparens-mode #'sp-use-smartparens-bindings)
 
 (eval-after-load "flycheck"
   '(progn
-     (define-key flycheck-mode-map (kbd "C-c C-n") 'flycheck-next-error)
-     (define-key flycheck-mode-map (kbd "C-c C-p") 'flycheck-previous-error)))
+     (define-key flycheck-mode-map (kbd "C-c C-n") #'flycheck-next-error)
+     (define-key flycheck-mode-map (kbd "C-c C-p") #'flycheck-previous-error)))
 
 (eval-after-load 'company
   '(progn
