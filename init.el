@@ -149,6 +149,7 @@ the mode-line."
  '(inhibit-startup-screen t)
  '(initial-buffer-choice t)
  '(make-backup-files nil)
+ '(restclient-log-request nil)
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(sp-hybrid-kill-entire-symbol nil)
