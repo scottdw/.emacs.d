@@ -87,17 +87,22 @@ the mode-line."
 (add-hook 'cider-repl-mode-hook #'subword-mode)
 (add-hook 'cider-repl-mode-hook #'remove-dos-eol)
 (add-hook 'cider-repl-mode-hook #'initialise-clj-refactor)
-(add-hook 'clojure-mode-hook #'flycheck-mode)
 (add-hook 'clojure-mode-hook #'smartparens-strict-mode)
 (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
 (add-hook 'clojure-mode-hook #'initialise-clj-refactor)
+(add-hook 'clojure-mode-hook #'eldoc-mode)
 (add-hook 'comint-output-filter-functions #'comint-watch-for-password-prompt)
 (add-hook 'emacs-lisp-mode-hook #'smartparens-strict-mode)
-(add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+;; warm artifact cache at REPL start up
+(add-hook 'nrepl-connected-hook #'cljr-update-artifact-cache)
+;; warm the AST cache at REPL start up
+(add-hook 'nrepl-connected-hook #'cljr-warm-ast-cache)
 (add-hook 'smartparens-mode #'sp-use-smartparens-bindings)
 
-(eval-after-load "flycheck"
+(eval-after-load 'flycheck
   '(progn
+     (setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages)
+     (flycheck-clojure-setup)
      (define-key flycheck-mode-map (kbd "C-c C-n") #'flycheck-next-error)
      (define-key flycheck-mode-map (kbd "C-c C-p") #'flycheck-previous-error)))
 
@@ -136,6 +141,7 @@ the mode-line."
  '(background-mode dark)
  '(calendar-date-style (quote iso))
  '(cider-auto-select-error-buffer t)
+ '(cider-repl-use-clojure-font-lock t)
  '(cider-show-error-buffer t)
  '(column-number-mode t)
  '(confirm-kill-emacs (quote yes-or-no-p))
@@ -145,7 +151,6 @@ the mode-line."
  '(display-time-24hr-format t)
  '(display-time-mode t)
  '(edit-server-new-frame nil)
- '(flycheck-display-errors-function #'flycheck-pos-tip-error-messages)
  '(foreground-color "#839496")
  '(inhibit-startup-screen t)
  '(initial-buffer-choice t)
