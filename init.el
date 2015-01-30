@@ -94,9 +94,9 @@ the mode-line."
 (add-hook 'comint-output-filter-functions #'comint-watch-for-password-prompt)
 (add-hook 'emacs-lisp-mode-hook #'smartparens-strict-mode)
 ;; warm artifact cache at REPL start up
-(add-hook 'nrepl-connected-hook #'cljr-update-artifact-cache)
+(add-hook 'cider-connected-hook #'cljr-update-artifact-cache)
 ;; warm the AST cache at REPL start up
-(add-hook 'nrepl-connected-hook #'cljr-warm-ast-cache)
+(add-hook 'cider-connected-hook #'cljr-warm-ast-cache)
 (add-hook 'smartparens-mode #'sp-use-smartparens-bindings)
 
 (eval-after-load 'flycheck
