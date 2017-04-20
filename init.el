@@ -56,6 +56,8 @@
 
 (defun initialise-global-modes ()
   "Turn on global modes."
+  (beacon-mode 1)
+  (company-quickhelp-mode 1)
   (global-company-mode 1)
   (global-flycheck-mode 1)
   (global-whitespace-mode 1)
