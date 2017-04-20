@@ -62,7 +62,7 @@
   (global-diff-hl-mode 1)
   (global-prettify-symbols-mode 1)
   (icomplete-mode 1)
-  (projectile-global-mode 1)
+  (projectile-mode 1)
   (semantic-mode 1)
   (smartparens-global-mode 1)
   (smex-initialize)
