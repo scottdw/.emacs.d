@@ -4,10 +4,9 @@
 ;;; ie. no machine specific settings.
 ;;; Code:
 
-(eval-after-load "package"
-  '(progn
-     (add-to-list 'package-archives
-                  '("melpa" . "http://melpa.org/packages/") t)))
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/") t)
 
 (package-initialize)
 
