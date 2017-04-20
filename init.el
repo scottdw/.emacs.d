@@ -91,7 +91,6 @@
 ;; warm the AST cache at REPL start up
 (add-hook 'cider-connected-hook #'cljr-warm-ast-cache)
 (add-hook 'smartparens-mode #'sp-use-smartparens-bindings)
-(add-hook 'restclient-response-loaded-hook #'view-mode)
 
 (eval-after-load 'flycheck
   '(progn
