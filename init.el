@@ -116,6 +116,9 @@
 
 (find-file "~/.emacs.d/local.el")
 (find-file "~/.emacs.d/init.el")
+
+(setq magit-last-seen-setup-instructions "1.4.0")
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
