@@ -13,17 +13,18 @@
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 
-;; this property must be set before loading the theme.
+;; These properties must be set before loading the theme.
 (require 'solarized)
-(setq solarized-distinct-fringe-background t)
-(setq solarized-use-variable-pitch nil)
-(setq solarized-scale-org-headlines nil)
-(setq solarized-use-more-italic t)
-(setq solarized-height-minus-1 1.0)
-(setq solarized-height-plus-1 1.0)
-(setq solarized-height-plus-2 1.0)
-(setq solarized-height-plus-3 1.0)
-(setq solarized-height-plus-4 1.0)
+(setq
+ solarized-distinct-fringe-background t
+ solarized-use-variable-pitch nil
+ solarized-scale-org-headlines nil
+ solarized-use-more-italic t
+ solarized-height-minus-1 1.0
+ solarized-height-plus-1 1.0
+ solarized-height-plus-2 1.0
+ solarized-height-plus-3 1.0
+ solarized-height-plus-4 1.0)
 (load-theme 'solarized-dark t)
 
 (let ((font-string "DejaVu Sans Mono-10"))
