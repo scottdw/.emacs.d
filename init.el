@@ -44,10 +44,6 @@
 (add-to-list 'load-path "~/elisp")
 
 ;; Keybindings
-(global-set-key "\M-g" #'goto-line)
-
-;; ace-jump
-(global-set-key (kbd "C-c SPC") #'ace-jump-mode)
 
 ;; hungry-delete
 (global-set-key (kbd "C-<delete>") #'hungry-delete-forward)
