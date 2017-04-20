@@ -122,6 +122,8 @@
 
 (load-file "~/.emacs.d/local.el")
 
+(find-file "~/.emacs.d/local.el")
+(find-file "~/.emacs.d/init.el")
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -165,8 +167,5 @@
 (put 'ido-complete 'disabled nil)
 (put 'ido-exit-minibuffer 'disabled nil)
 (put 'upcase-region 'disabled nil)
-
-(find-file "~/.emacs.d/local.el")
-(find-file "~/.emacs.d/init.el")
 
 ;;; init.el ends here
