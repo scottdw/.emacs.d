@@ -66,42 +66,34 @@
   (semantic-mode 1)
   (smartparens-global-mode 1)
   (smex-initialize)
+  (yas-global-mode 1)
   (server-start)
   (edit-server-start))
 
 (defun initialise-clj-refactor ()
   "Enables `clj-refactor-mode' and its keybindings."
   (clj-refactor-mode 1)
-  (yas/minor-mode 1)
   (cljr-add-keybindings-with-prefix "C-c r"))
 
 (add-hook 'after-init-hook #'initialise-global-modes)
 (add-hook 'cider-repl-mode-hook #'smartparens-strict-mode)
 (add-hook 'cider-repl-mode-hook #'subword-mode)
 (add-hook 'cider-repl-mode-hook #'remove-dos-eol)
-(add-hook 'cider-repl-mode-hook #'initialise-clj-refactor)
 (add-hook 'clojure-mode-hook #'smartparens-strict-mode)
 (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
 (add-hook 'clojure-mode-hook #'initialise-clj-refactor)
 (add-hook 'clojure-mode-hook #'eldoc-mode)
 (add-hook 'comint-output-filter-functions #'comint-watch-for-password-prompt)
 (add-hook 'emacs-lisp-mode-hook #'smartparens-strict-mode)
-;; warm artifact cache at REPL start up
-(add-hook 'cider-connected-hook #'cljr-update-artifact-cache)
-;; warm the AST cache at REPL start up
-(add-hook 'cider-connected-hook #'cljr-warm-ast-cache)
 (add-hook 'smartparens-mode #'sp-use-smartparens-bindings)
 
 (eval-after-load 'flycheck
   '(progn
-     (setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages)
-     (flycheck-clojure-setup)
-     (define-key flycheck-mode-map (kbd "C-c C-n") #'flycheck-next-error)
-     (define-key flycheck-mode-map (kbd "C-c C-p") #'flycheck-previous-error)))
+     (flycheck-pos-tip-mode)))
 
-(eval-after-load 'company
+(eval-after-load 'cider
   '(progn
-     (add-to-list 'company-backends 'company-capf)))
+     (flycheck-clojure-setup)))
 
 (display-time)
 
@@ -134,6 +126,7 @@
  '(calendar-date-style (quote iso))
  '(cider-auto-select-error-buffer t)
  '(cider-repl-use-clojure-font-lock t)
+ '(cider-repl-use-pretty-printing t)
  '(cider-show-error-buffer t)
  '(column-number-mode t)
  '(confirm-kill-emacs (quote yes-or-no-p))
