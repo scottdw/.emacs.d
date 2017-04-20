@@ -102,6 +102,23 @@
 
 (setq org-startup-folded "showall")
 
+;; Configure org-mode with Cider
+;; Configure Org-mode supported languages
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((clojure . t)
+   (emacs-lisp . t)))
+
+;; Use cider as the Clojure execution backend
+(setq org-babel-clojure-backend 'cider)
+;; No timeout when executing calls on Cider via nrepl
+(setq org-babel-clojure-sync-nrepl-timeout nil)
+;; Let's have pretty source code blocks
+(setq org-edit-src-content-indentation 0
+      org-src-tab-acts-natively t
+      org-src-fontify-natively t
+      org-confirm-babel-evaluate nil)
+(add-hook 'org-mode-hook (lambda () (org-display-inline-images t t)))
 (defvar user-temporary-file-directory
   (concat temporary-file-directory user-login-name "/"))
 
