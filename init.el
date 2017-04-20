@@ -54,12 +54,6 @@
 (global-set-key (kbd "M-X") #'smex-major-mode-commands)
 (global-set-key (kbd "C-c C-c M-x") #'execute-extended-command)
 
-(autoload 'window-number-meta-mode "window-number"
-  "A global minor mode that enables use of the M- prefix to select
-windows, use `window-number-mode' to display the window numbers in
-the mode-line."
-  t)
-
 (defun initialise-global-modes ()
   "Turn on global modes."
   (global-company-mode 1)
@@ -72,8 +66,6 @@ the mode-line."
   (semantic-mode 1)
   (smartparens-global-mode 1)
   (smex-initialize)
-  (window-number-meta-mode)
-  (window-number-mode)
   (server-start)
   (edit-server-start))
 
