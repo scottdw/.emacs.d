@@ -27,6 +27,10 @@
  solarized-height-plus-4 1.0)
 (load-theme 'solarized-dark t)
 
+(require 'smart-mode-line)
+(setq sml/theme nil)
+(sml/setup)
+
 (let ((font-string "DejaVu Sans Mono-10"))
   (when (x-list-fonts font-string)
     (set-face-attribute 'default nil :font font-string)))
