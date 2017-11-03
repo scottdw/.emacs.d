@@ -49,10 +49,11 @@
 (global-set-key (kbd "C-<delete>") #'hungry-delete-forward)
 (global-set-key (kbd "C-<backspace>") #'hungry-delete-backward)
 
+;; DISABLING for now
 ;; smex
-(global-set-key (kbd "M-x") #'smex)
-(global-set-key (kbd "M-X") #'smex-major-mode-commands)
-(global-set-key (kbd "C-c C-c M-x") #'execute-extended-command)
+;;(global-set-key (kbd "M-x") #'smex)
+;;(global-set-key (kbd "M-X") #'smex-major-mode-commands)
+;;(global-set-key (kbd "C-c C-c M-x") #'execute-extended-command)
 
 (defun initialise-global-modes ()
   "Turn on global modes."
@@ -68,7 +69,6 @@
   (semantic-mode 1)
   (smartparens-global-mode 1)
   (smex-initialize)
-  (yas-global-mode 1)
   (server-start)
   (edit-server-start))
 

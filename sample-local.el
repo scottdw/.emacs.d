@@ -175,4 +175,53 @@ point reaches the beginning or end of the buffer, stop there."
 
 (define-key global-map "\M-Q" 'unfill-paragraph)
 
+;; http://stackoverflow.com/a/6541072/298135 url encode/decode commands
+(defun func-region (start end func)
+  "In the region between START and END in current buffer run FUNC."
+  (save-excursion
+    (let ((text (delete-and-extract-region start end)))
+      (insert (funcall func text)))))
+
+(defun hex-region (start end)
+  "Urlencode the region between START and END in current buffer."
+  (interactive "r")
+  (func-region start end #'url-hexify-string))
+
+(defun unhex-region (start end)
+  "De-urlencode the region between START and END in current buffer."
+  (interactive "r")
+  (func-region start end #'url-unhex-string))
+
+;; Description: Finds a specific line in the buffer using binary search.
+;; Author: Mads Kalør
+;; https://raw.githubusercontent.com/mKaloer/emacs.d/master/plugins/find-line-in-buffer.el
+(defun find-line-in-region (start end)
+  "Find a line in the region between START and END."
+  (let ((mid (+ start (/ (- end start) 2)))) ;; Calculate middle line
+    (goto-char (point-min)) ;; Go to mid line
+    (forward-line (1- mid)) ;;
+    (if (> (- end start) 1) ;; Base case
+        (let ((input (read-char "Above (p) or below (n): ")))
+          (if (eq input ?p)
+              (progn
+                (message "up")
+                (find-line-in-region start mid))
+            (if (eq input ?n)
+                (progn
+                  (message "Down")
+                  (find-line-in-region mid end))))))))
+
+(defun find-line-in-buffer (in-region)
+  "Find a line in IN-REGION using binary search.
+If called with prefix, it is run on the current region."
+  (interactive "P")
+  (deactivate-mark)
+  (if (and in-region ;; Make sure region contains multiple lines
+           (eq (line-number-at-pos (point)) (line-number-at-pos (mark))))
+      (user-error "Region must contain several lines!"))
+  ;; Set start and end positions based on argument
+  (let ((start (if in-region (min (point) (mark)) (point-min)))
+        (end (if in-region (max (point) (mark)) (point-max))))
+    (push-mark)
+    (find-line-in-region (line-number-at-pos start) (line-number-at-pos end))))
 ;;; local.el ends here
