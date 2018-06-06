@@ -57,7 +57,6 @@
 
 (defun initialise-global-modes ()
   "Turn on global modes."
-  (beacon-mode 1)
   (company-quickhelp-mode 1)
   (global-company-mode 1)
   (global-flycheck-mode 1)
@@ -68,7 +67,6 @@
   (projectile-mode 1)
   (semantic-mode 1)
   (smartparens-global-mode 1)
-  (smex-initialize)
   (server-start)
   (edit-server-start))
 
@@ -104,25 +102,10 @@
 
 (setq org-startup-folded "showall")
 
-;; Configure org-mode with Cider
-;; Configure Org-mode supported languages
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((clojure . t)
-   (emacs-lisp . t)))
-
-;; Use cider as the Clojure execution backend
-(setq org-babel-clojure-backend 'cider)
-;; No timeout when executing calls on Cider via nrepl
-(setq org-babel-clojure-sync-nrepl-timeout nil)
-;; Let's have pretty source code blocks
-(setq org-edit-src-content-indentation 0
-      org-src-tab-acts-natively t
-      org-src-fontify-natively t
-      org-confirm-babel-evaluate nil)
 (add-hook 'org-mode-hook (lambda () (org-display-inline-images t t)))
+
 (defvar user-temporary-file-directory
-  (concat temporary-file-directory user-login-name "/"))
+  (concat temporary-file-directory "emacs/"))
 
 (make-directory user-temporary-file-directory t)
 (setq auto-save-list-file-prefix
@@ -159,9 +142,11 @@
  '(display-time-mode t)
  '(edit-server-new-frame nil)
  '(foreground-color "#839496")
+ '(help-window-select t)
  '(inhibit-startup-screen t)
  '(initial-buffer-choice t)
  '(make-backup-files nil)
+ '(nxml-sexp-element-flag t)
  '(restclient-log-request nil)
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -169,7 +154,9 @@
  '(tab-always-indent (quote complete))
  '(truncate-lines t)
  '(visible-bell t)
- '(whitespace-style (quote (face tabs trailing space-before-tab empty space-after-tab))))
+ '(whitespace-style
+   (quote
+    (face tabs trailing space-before-tab empty space-after-tab))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -182,5 +169,6 @@
 (put 'ido-complete 'disabled nil)
 (put 'ido-exit-minibuffer 'disabled nil)
 (put 'upcase-region 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
 
 ;;; init.el ends here
