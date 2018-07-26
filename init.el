@@ -65,10 +65,7 @@
 
 (use-package flycheck
   :ensure t
-  :bind
-  (:map flycheck-mode-map
-        ("C-c C-n" . flycheck-next-error)
-        ("C-c C-p" . flycheck-previous-error)))
+  :bind)
 
 (use-package flycheck-pos-tip
   :ensure t
