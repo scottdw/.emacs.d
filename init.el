@@ -4,32 +4,33 @@
 ;;; ie. no machine specific settings.
 ;;; Code:
 
-(require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/") t)
+(eval-after-load "package"
+  '(progn
+     (add-to-list 'package-archives
+                  '("melpa" . "http://melpa.org/packages/") t)))
+
+(add-to-list 'load-path "~/elisp")
 
 (package-initialize)
 
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 
-;; These properties must be set before loading the theme.
-(require 'solarized)
-(setq
- solarized-distinct-fringe-background t
- solarized-use-variable-pitch nil
- solarized-scale-org-headlines nil
- solarized-use-more-italic t
- solarized-height-minus-1 1.0
- solarized-height-plus-1 1.0
- solarized-height-plus-2 1.0
- solarized-height-plus-3 1.0
- solarized-height-plus-4 1.0)
-(load-theme 'solarized-dark t)
+(require 'use-package)
+(use-package solarized-theme
+  :ensure t
+  :init
+  (setq solarized-distinct-fringe-background t)
+  (setq solarized-use-variable-pitch nil)
+  (setq solarized-scale-org-headlines nil)
+  (setq solarized-use-more-italic t)
+  (setq solarized-height-minus-1 1.0)
+  (setq solarized-height-plus-1 1.0)
+  (setq solarized-height-plus-2 1.0)
+  (setq solarized-height-plus-3 1.0)
+  (setq solarized-height-plus-4 1.0))
 
-(require 'smart-mode-line)
-(setq sml/theme nil)
-(sml/setup)
+(load-theme 'solarized-dark t)
 
 (let ((font-string "DejaVu Sans Mono-10"))
   (when (x-list-fonts font-string)
@@ -39,27 +40,87 @@
 (setq-default tab-width 4)
 
 ;; Configure smartparens
-(require 'smartparens-config)
+(use-package smartparens
+  :ensure t
+  :config (require 'smartparens-config)
+  :hook sp-use-smartparens-bindings)
 
-(add-to-list 'load-path "~/elisp")
+(use-package hungry-delete
+  :ensure t
+  :bind
+  (("C-<delete>" . hungry-delete-forward)
+   ("C-<backspace>" . hungry-delete-backward)))
 
-;; Keybindings
+(use-package aggressive-indent
+  :ensure t)
 
-;; hungry-delete
-(global-set-key (kbd "C-<delete>") #'hungry-delete-forward)
-(global-set-key (kbd "C-<backspace>") #'hungry-delete-backward)
+(use-package company
+  :ensure t
+  :config
+  (setq company-dabbrev-downcase nil)
+  (add-to-list 'company-backends 'company-capf))
 
-;; DISABLING for now
-;; smex
-;;(global-set-key (kbd "M-x") #'smex)
-;;(global-set-key (kbd "M-X") #'smex-major-mode-commands)
-;;(global-set-key (kbd "C-c C-c M-x") #'execute-extended-command)
+(use-package company-quickhelp
+  :ensure t
+  :config
+  (company-quickhelp-mode 1))
+
+(use-package projectile
+  :ensure t)
+
+(use-package magit
+  :ensure t
+  :config
+  (setq magit-last-seen-setup-instructions "1.4.0"))
+
+(use-package flycheck
+  :ensure t
+  :init
+  (global-flycheck-mode))
+
+(use-package flycheck-pos-tip
+  :ensure t
+  :config
+  (setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
+
+(use-package flycheck-clojure
+  :ensure t
+  :after (flycheck cider)
+  :config
+  (flycheck-clojure-setup))
+
+(use-package diff-hl
+  :ensure t)
+
+(use-package edit-server
+  :ensure t)
+
+(use-package cider
+  :ensure t
+  :config
+  (add-hook 'cider-repl-mode-hook #'smartparens-strict-mode)
+  (add-hook 'cider-repl-mode-hook #'subword-mode)
+;;  (add-hook 'cider-repl-mode-hook #'remove-dos-eol)
+)
+
+(use-package clojure-mode
+  :ensure t
+  :mode (("\\.clj\\'" . clojure-mode)
+         ("\\.edn\\'" . clojure-mode))
+  :config
+  (add-hook 'clojure-mode-hook #'smartparens-strict-mode)
+  (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
+  (add-hook 'clojure-mode-hook #'eldoc-mode)
+  )
+
+(use-package restclient
+  :ensure t
+  :mode (("\\.http\\'" . restclient-mode))
+  :config (setq restclient-log-request nil))
 
 (defun initialise-global-modes ()
   "Turn on global modes."
-  (company-quickhelp-mode 1)
   (global-company-mode 1)
-  (global-flycheck-mode 1)
   (global-whitespace-mode 1)
   (global-diff-hl-mode 1)
   (global-prettify-symbols-mode 1)
@@ -70,30 +131,10 @@
   (server-start)
   (edit-server-start))
 
-(defun initialise-clj-refactor ()
-  "Enables `clj-refactor-mode' and its keybindings."
-  (clj-refactor-mode 1)
-  (cljr-add-keybindings-with-prefix "C-c r"))
-
 (add-hook 'after-init-hook #'initialise-global-modes)
-(add-hook 'cider-repl-mode-hook #'smartparens-strict-mode)
-(add-hook 'cider-repl-mode-hook #'subword-mode)
-(add-hook 'cider-repl-mode-hook #'remove-dos-eol)
-(add-hook 'clojure-mode-hook #'smartparens-strict-mode)
-(add-hook 'clojure-mode-hook #'aggressive-indent-mode)
-(add-hook 'clojure-mode-hook #'initialise-clj-refactor)
-(add-hook 'clojure-mode-hook #'eldoc-mode)
+
 (add-hook 'comint-output-filter-functions #'comint-watch-for-password-prompt)
 (add-hook 'emacs-lisp-mode-hook #'smartparens-strict-mode)
-(add-hook 'smartparens-mode #'sp-use-smartparens-bindings)
-
-(eval-after-load 'flycheck
-  '(progn
-     (flycheck-pos-tip-mode)))
-
-(eval-after-load 'cider
-  '(progn
-     (flycheck-clojure-setup)))
 
 (display-time)
 
@@ -118,8 +159,6 @@
 
 (find-file "~/.emacs.d/local.el")
 (find-file "~/.emacs.d/init.el")
-
-(setq magit-last-seen-setup-instructions "1.4.0")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -146,6 +185,7 @@
  '(inhibit-startup-screen t)
  '(initial-buffer-choice t)
  '(make-backup-files nil)
+ '(mode-require-final-newline nil)
  '(nxml-sexp-element-flag t)
  '(restclient-log-request nil)
  '(scroll-bar-mode nil)
