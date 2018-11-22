@@ -123,6 +123,25 @@
 (use-package ws-butler
   :ensure t)
 
+(use-package bln-mode
+  :ensure t
+  :bind ("M-j" . hydra-bln/body)
+  :init
+  (defhydra hydra-bln (:hint none)
+     "
+Binary Search Navigation:
+Line  : _j_, _k_
+Buffer: _h_, _l_
+Window: _u_, _i_
+Quit: _q_"
+     ("j" bln-backward-half "Backward in line")
+     ("k" bln-forward-half "Forward in line")
+     ("u" bln-backward-half-v "Backward in window")
+     ("i" bln-forward-half-v "Forward in window")
+     ("h" bln-backward-half-b "Backward in buffer")
+     ("l" bln-forward-half-b "Forward in buffer")
+     ("q" (message "Abort") :exit t)))
+
 (defun initialise-global-modes ()
   "Turn on global modes."
   (global-company-mode 1)
