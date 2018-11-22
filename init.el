@@ -120,12 +120,16 @@
   :mode (("\\.http\\'" . restclient-mode))
   :config (setq restclient-log-request nil))
 
+(use-package ws-butler
+  :ensure t)
+
 (defun initialise-global-modes ()
   "Turn on global modes."
   (global-company-mode 1)
   (global-whitespace-mode 1)
   (global-diff-hl-mode 1)
   (global-prettify-symbols-mode 1)
+  (ws-butler-global-mode 1)
   (icomplete-mode 1)
   (projectile-mode 1)
   (semantic-mode 1)
