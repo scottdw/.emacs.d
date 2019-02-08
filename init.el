@@ -115,6 +115,18 @@
   (add-hook 'clojure-mode-hook #'eldoc-mode)
   )
 
+(defun clj-refactor-initialise ()
+  "Hook function to initialise clj-refactor."
+   (clj-refactor-mode 1)
+   (yas-minor-mode 1)
+   (cljr-add-keybindings-with-prefix "C-c C-r"))
+
+(use-package clj-refactor
+  :ensure t
+  :after (clojure-mode)
+  :config
+  (add-hook 'clojure-mode-hook #'clj-refactor-initialise))
+
 (use-package restclient
   :ensure t
   :mode (("\\.http\\'" . restclient-mode))
