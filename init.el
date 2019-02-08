@@ -7,7 +7,7 @@
 (eval-after-load "package"
   '(progn
      (add-to-list 'package-archives
-                  '("melpa" . "http://melpa.org/packages/") t)))
+                  '("melpa" . "https://melpa.org/packages/") t)))
 
 (add-to-list 'load-path "~/elisp")
 
